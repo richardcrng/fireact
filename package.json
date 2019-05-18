@@ -2,7 +2,7 @@
   "name": "use-firebase",
   "version": "0.1.0",
   "description": "A set of React hooks for using Firebase",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "npx babel src --out-dir dist"
   },
