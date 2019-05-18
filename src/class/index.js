@@ -21,7 +21,15 @@ class Firebase {
       messagingSenderId
     });
 
-    this.app = firebase
+    // Construct services
+    this.app = firebase.app()
+    this.auth = firebase.auth()
+    this.database = firebase.database()
+    this.firestore = firebase.firestore()
+    this.functions = firebase.functions()
+    this.messaging = firebase.messaging()
+    this.performance = firebase.performance()
+    this.storage = firebase.storage()
   }
 }
 

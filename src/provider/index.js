@@ -8,7 +8,7 @@ import FirebaseContext from '../context';
  * @param {FirebaseConfig} config 
  */
 function useFirebaseProvider(config) {
-  const [firebase] = React.useState(new Firebase(config).app)
+  const [firebase] = React.useState(new Firebase(config))
 
   function FirebaseProvider({ children }) {
     return (
