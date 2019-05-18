@@ -34,8 +34,8 @@ class Firebase {
 }
 
 const executeAndSpread = firebaseModule => ({
-  ...firebaseModule(),
-  ...firebaseModule
+  ...firebaseModule,
+  ...firebaseModule()
 })
 
 export default Firebase;
