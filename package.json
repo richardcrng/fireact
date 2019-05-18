@@ -24,8 +24,9 @@
     "@babel/preset-react": "^7.0.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4",
+    "core-js": "^3.0.1",
     "firebase": "^6.0.2",
-    "react": "^16.8.6"
+    "react": "^16.8.6",
+    "regenerator-runtime": "^0.13.2"
   }
 }
