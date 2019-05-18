@@ -4,7 +4,8 @@
   "description": "A set of React hooks for using Firebase",
   "main": "dist/index.js",
   "scripts": {
-    "prepublishOnly": "npx babel src --out-dir dist"
+    "build": "npx babel src --out-dir dist",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,8 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4"
+    "@babel/preset-env": "^7.4.4",
+    "@babel/preset-react": "^7.0.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
