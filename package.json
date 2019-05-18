@@ -2,9 +2,9 @@
   "name": "use-firebase",
   "version": "0.1.0",
   "description": "A set of React hooks for using Firebase",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublishOnly": "npx babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/richardcrng/use-firebase/issues"
   },
-  "homepage": "https://github.com/richardcrng/use-firebase#readme"
+  "homepage": "https://github.com/richardcrng/use-firebase#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4"
+  }
 }
