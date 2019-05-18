@@ -28,7 +28,7 @@ class Firebase {
     this.firestore = firebase.firestore()
     this.functions = firebase.functions()
     this.messaging = firebase.messaging()
-    this.performance = firebase.performance()
+    // this.performance = firebase.performance()
     this.storage = firebase.storage()
   }
 }

@@ -10,15 +10,13 @@ import FirebaseContext from '../context';
 function useFirebaseProvider(config) {
   const [firebase] = React.useState(new Firebase(config))
 
-  function FirebaseProvider({ children }) {
+  return function FirebaseProvider({ children }) {
     return (
       <FirebaseContext.Provider value={firebase}>
         {children}
       </FirebaseContext.Provider>
     )
   }
-
-  return React.useCallback(FirebaseProvider)
 }
 
 export default useFirebaseProvider;
