@@ -23,14 +23,19 @@ class Firebase {
 
     // Construct services
     this.app = firebase.app()
-    this.auth = firebase.auth()
-    this.database = firebase.database()
-    this.firestore = firebase.firestore()
-    this.functions = firebase.functions()
-    this.messaging = firebase.messaging()
+    this.auth = executeAndSpread(firebase.auth)
+    this.database = executeAndSpread(firebase.database)
+    this.firestore = executeAndSpread(firebase.firestore)
+    this.functions = executeAndSpread(firebase.functions)
+    this.messaging = executeAndSpread(firebase.messaging)
     // this.performance = firebase.performance()
-    this.storage = firebase.storage()
+    this.storage = executeAndSpread(firebase.storage)
   }
 }
+
+const executeAndSpread = firebaseModule => ({
+  ...firebaseModule(),
+  ...firebaseModule
+})
 
 export default Firebase;
