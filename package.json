@@ -4,7 +4,7 @@
   "description": "A set of React hooks for using Firebase",
   "main": "index.js",
   "scripts": {
-    "prepublishOnly": "npx babel src --out-dir dist",
+    "prepublishOnly": "npx babel src --out-dir dist"
   },
   "repository": {
     "type": "git",
