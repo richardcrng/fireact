@@ -1,8 +1,8 @@
 import React from 'react';
 import FirebaseContext from '../context';
 
-function useFirebase() {
+function useFirebaseContext() {
   return React.useContext(FirebaseContext)
 }
 
-export default useFirebase;
+export default useFirebaseContext;
