@@ -1,0 +1,19 @@
+{
+  "name": "use-firebase",
+  "version": "0.1.0",
+  "description": "A set of React hooks for using Firebase",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardcrng/use-firebase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richardcrng/use-firebase/issues"
+  },
+  "homepage": "https://github.com/richardcrng/use-firebase#readme"
+}
