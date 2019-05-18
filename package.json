@@ -22,6 +22,8 @@
     "@babel/preset-env": "^7.4.4"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.4"
+    "@babel/polyfill": "^7.4.4",
+    "firebase": "^6.0.2",
+    "react": "^16.8.6"
   }
 }
