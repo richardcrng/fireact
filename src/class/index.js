@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -23,13 +24,13 @@ class Firebase {
 
     // Construct services
     this.app = firebase.app()
-    this.auth = executeAndSpread(firebase.auth)
-    this.database = executeAndSpread(firebase.database)
-    this.firestore = executeAndSpread(firebase.firestore)
-    this.functions = executeAndSpread(firebase.functions)
-    this.messaging = executeAndSpread(firebase.messaging)
-    // this.performance = firebase.performance()
-    this.storage = executeAndSpread(firebase.storage)
+
+    ['auth', 'database', 'firestore', 'functions', 'messaging', 'storage'].forEach(
+      moduleName => {
+        this[moduleName] = firebase[moduleName]
+        this[_.capitalize(moduleName)] = firebase[moduleName]()
+      }
+    )
   }
 }
 
