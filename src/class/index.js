@@ -25,7 +25,8 @@ class Firebase {
     // Construct services
     this.app = firebase.app()
 
-    ['auth', 'database', 'firestore', 'functions', 'messaging', 'storage'].forEach(
+    _.forEach(
+      ['auth', 'database', 'firestore', 'functions', 'messaging', 'storage'],
       moduleName => {
         this[moduleName] = firebase[moduleName]
         this[_.capitalize(moduleName)] = firebase[moduleName]()
