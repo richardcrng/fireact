@@ -1,11 +1,26 @@
+import React from 'react';
 import Firebase from "../class";
+import FirebaseContext from '../context';
 
-const createFirebaseMiddleware = (config, products) => {
+/**
+ * 
+ * @param {FirebaseConfig} config 
+ * @param {FirebaseProduct[]} products 
+ */
+const firebaseProviderAndMiddleware = (config, products) => {
   const firebase = new Firebase(config, products)
 
-  return store => next => action => {
+  const provider = ({ children }) => (
+    <FirebaseContext.Provider>
+      {children}
+    </FirebaseContext.Provider>
+  )
+
+  const middleware = store => next => action => {
     return next({ ...action, firebase })
   }
+
+  return [provider, middleware, firebase]
 }
 
-export default createFirebaseMiddleware
+export default firebaseProviderAndMiddleware
