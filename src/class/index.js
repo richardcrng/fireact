@@ -35,9 +35,4 @@ class Firebase {
   }
 }
 
-const executeAndSpread = firebaseModule => ({
-  ...firebaseModule,
-  ...firebaseModule()
-})
-
 export default Firebase;
