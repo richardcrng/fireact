@@ -1,11 +1,5 @@
 import _ from 'lodash';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
-import 'firebase/firestore';
-import 'firebase/functions'
-import 'firebase/storage';
-import 'firebase/messaging'
+import * as firebase from 'firebase/app'
 
 class Firebase {
   /**
@@ -13,24 +7,23 @@ class Firebase {
    * @param {FirebaseConfig} config - Firebase Configuration options
    * @param {FirebaseProduct[]} products - Firebase Products to initialise
    */
-  constructor(config, products) {
-    // Require specific products
-    _.forEach(
-      products,
-      product => require(`firebase/${product}`)
-    )
-
+  constructor(config, products = []) {
     // Initialise app if needed
     if (!firebase.apps.length) firebase.initializeApp(config)
 
     // Construct services
-    this.app = firebase.app()
+    this.app = firebase.app
 
-    _.forEach(
-      products,
+    products.forEach(
       moduleName => {
-        this[moduleName] = firebase[moduleName]
-        this[_.capitalize(moduleName)] = firebase[moduleName]()
+        // Require the specific product
+        const firebaseProduct = firebase[moduleName]
+        this[moduleName] = firebaseProduct
+        
+        // Initialise as capitalised if appropriate
+        if (typeof firebaseProduct === "function") {
+          this[_.capitalize(moduleName)] = firebaseProduct()
+        }
       }
     )
   }
