@@ -1,12 +1,5 @@
 import _ from 'lodash';
-// Core Firebase SDK (Firebase App)
-import * as firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/database';
-// import 'firebase/firestore';
-// import 'firebase/functions'
-// import 'firebase/storage';
-// import 'firebase/messaging'
+import firebase from 'firebase'
 
 class Firebase {
   /**
@@ -15,25 +8,22 @@ class Firebase {
    * @param {FirebaseProduct[]} products - Firebase Products to initialise
    */
   constructor(config, products) {
-    // Require specific products
-    _.forEach(
-      products,
-      product => require(`firebase/${product}`)
-    )
-
     // Initialise app if needed
     if (!firebase.apps.length) firebase.initializeApp(config)
 
     // Construct services
     this.app = firebase.app
-    const app = this.app()
 
     _.forEach(
       products,
       moduleName => {
         // Require the specific product
-        this[moduleName] = app[moduleName]
-        // this[_.capitalize(moduleName)] = firebase[moduleName]()
+        this[moduleName] = firebase[moduleName]
+
+        if (typeof firebase[moduleName] === "function") {
+          // Capitalised: interface initialised
+          this[_.capitalize(moduleName)] = firebase[moduleName]()
+        }
       }
     )
   }
