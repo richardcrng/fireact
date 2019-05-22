@@ -18,7 +18,7 @@ function useFirebaseProvider(config) {
     )
   }
 
-  return React.useCallback(FirebaseProvider)
+  return React.useCallback(FirebaseProvider, [firebase])
 }
 
 export default useFirebaseProvider;
