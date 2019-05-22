@@ -11,22 +11,23 @@ class Firebase {
   /**
    * 
    * @param {FirebaseConfig} config - Firebase Configuration options
+   * @param {FirebaseProduct[]} products - Firebase Products to initialise
    */
-  constructor({ apiKey, authDomain, databaseURL, projectId, storageBucket, messagingSenderId }) {
-    if (!firebase.apps.length) firebase.initializeApp({
-      authDomain,
-      apiKey,
-      databaseURL,
-      projectId,
-      storageBucket,
-      messagingSenderId
-    });
+  constructor(config, products) {
+    // Require specific products
+    _.forEach(
+      products,
+      product => require(`firebase/${product}`)
+    )
+
+    // Initialise app if needed
+    if (!firebase.apps.length) firebase.initializeApp(config)
 
     // Construct services
     this.app = firebase.app()
 
     _.forEach(
-      ['auth', 'database', 'firestore', 'functions', 'messaging', 'storage'],
+      products,
       moduleName => {
         this[moduleName] = firebase[moduleName]
         this[_.capitalize(moduleName)] = firebase[moduleName]()
