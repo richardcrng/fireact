@@ -1,7 +1,9 @@
-import useFirebase from './hook/index';
-import useFirebaseProvider from './provider/index';
+import {
+  useFirebaseContext,
+  useFirebaseProvider
+} from './hooks';
 
 export {
-  useFirebase,
+  useFirebaseContext,
   useFirebaseProvider
 }
