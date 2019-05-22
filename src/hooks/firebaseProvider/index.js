@@ -5,10 +5,11 @@ import FirebaseContext from '../context';
 /**
  * Creates a Firebase Provider
  * 
- * @param {FirebaseConfig} config 
+ * @param {FirebaseConfig} config - Configuration options for Firebase
+ * @param {FirebaseProduct[]} products - Array of Firebase Products to initialise
  */
-function useFirebaseProvider(config) {
-  const [firebase] = React.useState(new Firebase(config))
+function useFirebaseProvider(config, products) {
+  const [firebase] = React.useState(new Firebase(config, products))
 
   function FirebaseProvider({ children }) {
     return (
@@ -18,7 +19,7 @@ function useFirebaseProvider(config) {
     )
   }
 
-  return React.useCallback(FirebaseProvider)
+  return React.useCallback(FirebaseProvider, [firebase])
 }
 
 export default useFirebaseProvider;
