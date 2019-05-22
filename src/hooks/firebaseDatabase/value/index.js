@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
-import { useFirebaseContext } from "../..";
+import { useFirebaseContext } from "../../../hooks";
 
 function useFirebaseDatabaseValue(path) {
   const firebase = useFirebaseContext()

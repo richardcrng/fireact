@@ -1,6 +1,21 @@
 import _ from 'lodash';
 import * as firebase from 'firebase/app'
 
+/**
+ * 
+ * @param {FirebaseProduct} product 
+ */
+const loadFirebaseModule = product => {
+  switch (product) {
+    case 'auth': return require('firebase/auth')
+    case 'database': return require('firebase/database')
+    case 'firestore': return require('firebase/firestore')
+    case 'functions': return require('firebase/functions')
+    case 'messaging': return require('firebase/messaging')
+    case 'storage': return require('firebase/storage')
+  }
+}
+
 class Firebase {
   /**
    * 
@@ -8,6 +23,8 @@ class Firebase {
    * @param {FirebaseProduct[]} products - Firebase Products to initialise
    */
   constructor(config, products = []) {
+    products.forEach(loadFirebaseModule)
+
     // Initialise app if needed
     if (!firebase.apps.length) firebase.initializeApp(config)
 
