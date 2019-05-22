@@ -7,7 +7,7 @@ import FirebaseContext from '../context';
  * @param {FirebaseConfig} config 
  * @param {FirebaseProduct[]} products 
  */
-const firebaseProviderAndMiddleware = (config, products) => {
+const provideFirebaseMiddleware = (config, products) => {
   const firebase = new Firebase(config, products)
 
   const FirebaseProvider = ({ children }) => (
@@ -23,4 +23,4 @@ const firebaseProviderAndMiddleware = (config, products) => {
   return [FirebaseProvider, reduxMiddleware, firebase]
 }
 
-export default firebaseProviderAndMiddleware
+export default provideFirebaseMiddleware
