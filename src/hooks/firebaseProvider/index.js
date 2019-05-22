@@ -1,6 +1,6 @@
 import React from 'react';
-import Firebase from '../class';
 import FirebaseContext from '../context';
+import Firebase from '../../class';
 
 /**
  * Creates a Firebase Provider
