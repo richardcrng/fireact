@@ -11,7 +11,7 @@ const firebaseProviderAndMiddleware = (config, products) => {
   const firebase = new Firebase(config, products)
 
   const provider = ({ children }) => (
-    <FirebaseContext.Provider>
+    <FirebaseContext.Provider value={firebase}>
       {children}
     </FirebaseContext.Provider>
   )
