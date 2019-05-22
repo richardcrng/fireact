@@ -1,5 +1,5 @@
 import React from 'react';
-import FirebaseContext from '../context';
+import FirebaseContext from '../../context';
 import Firebase from '../../class';
 
 /**
