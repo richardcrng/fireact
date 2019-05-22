@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import firebase from 'firebase/app';
+// Core Firebase SDK (Firebase App)
+import * as firebase from 'firebase/app';
 // import 'firebase/auth';
 // import 'firebase/database';
 // import 'firebase/firestore';
@@ -29,8 +30,9 @@ class Firebase {
     _.forEach(
       products,
       moduleName => {
-        this[moduleName] = firebase[moduleName]
-        this[_.capitalize(moduleName)] = firebase[moduleName]()
+        // Require the specific product
+        this[moduleName] = require(`firebase/${product}`)
+        // this[_.capitalize(moduleName)] = firebase[moduleName]()
       }
     )
   }
