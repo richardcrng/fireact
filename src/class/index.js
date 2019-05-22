@@ -25,13 +25,14 @@ class Firebase {
     if (!firebase.apps.length) firebase.initializeApp(config)
 
     // Construct services
-    this.app = firebase.app()
+    this.app = firebase.app
+    const app = this.app()
 
     _.forEach(
       products,
       moduleName => {
         // Require the specific product
-        this[moduleName] = require(`firebase/${product}`)
+        this[moduleName] = app[moduleName]
         // this[_.capitalize(moduleName)] = firebase[moduleName]()
       }
     )
