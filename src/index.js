@@ -4,6 +4,7 @@ import {
   useFirebaseProvider
 } from './hooks';
 
+import firebaseProviderAndMiddleware from './middleware';
 
 const useFirebase = useFirebaseContext
 
@@ -12,5 +13,6 @@ export {
   useFirebase,
   useFirebaseContext,
   useFirebaseDatabaseValue,
-  useFirebaseProvider
+  useFirebaseProvider,
+  firebaseProviderAndMiddleware
 }
