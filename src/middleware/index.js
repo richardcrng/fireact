@@ -10,17 +10,17 @@ import FirebaseContext from '../context';
 const firebaseProviderAndMiddleware = (config, products) => {
   const firebase = new Firebase(config, products)
 
-  const provider = ({ children }) => (
+  const FirebaseProvider = ({ children }) => (
     <FirebaseContext.Provider value={firebase}>
       {children}
     </FirebaseContext.Provider>
   )
 
-  const middleware = store => next => action => {
+  const reduxMiddleware = store => next => action => {
     return next({ ...action, firebase })
   }
 
-  return [provider, middleware, firebase]
+  return [FirebaseProvider, reduxMiddleware, firebase]
 }
 
 export default firebaseProviderAndMiddleware
