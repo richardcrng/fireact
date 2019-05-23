@@ -1,4 +1,4 @@
-import { generatePushID } from './generatePushId';
+import { generatePushID } from './generatePushID';
 
 export {
   generatePushID
