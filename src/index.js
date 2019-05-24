@@ -3,6 +3,8 @@ import {
 } from './hooks';
 
 import provideFirebaseMiddleware from './middleware';
+import references from './references';
+import writes from './writes';
 
 const useFirebase = useFirebaseContext
 
@@ -13,4 +15,6 @@ export {
   provideFirebaseMiddleware as default,
   provideFirebaseMiddleware,
   useFirebase,
+  references,
+  writes
 }
