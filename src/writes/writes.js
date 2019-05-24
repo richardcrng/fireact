@@ -1,12 +1,12 @@
 import * as R from 'ramda'
 import references from '../references';
 
-export const setEntityTypeById = (entityType, id, newValue) => (
-  references.getEntityTypeById(entityType, id)
+export const setEntityTypeByKey = R.curry((firebase, entityType, key, newValue) => (
+  references.getEntityTypeByKey(firebase, entityType, key)
     .set(newValue)
-)
+))
 
-export const updateEntityTypeById = (entityType, id, newProps) => (
-  references.getEntityTypeById(entityType, id)
-    .update(newProps)
-)
+export const updateEntityTypeByKey = R.curry((firebase, entityType, key, newProps) => (
+  references.getEntityTypeByKey(firebase, entityType, key)
+    .update({ key, ...newProps })
+))

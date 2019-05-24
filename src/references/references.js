@@ -1,7 +1,5 @@
 import * as R from 'ramda'
 
-import { firebaseInstance } from '..';
-
-export const getEntityTypeById = R.curry((entityType, id) => (
-  firebaseInstance.database().ref(`${entityType}/${id}`)
+export const getEntityTypeById = R.curry((firebase, entityType, id) => (
+  firebase.database().ref(`${entityType}/${id}`)
 ))
