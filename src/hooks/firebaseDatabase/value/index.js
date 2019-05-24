@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import * as R from 'ramda'
 import React from 'react';
 import { useFirebaseContext } from "../../../hooks";
 
@@ -10,7 +11,7 @@ function useFirebaseDatabaseValue(path) {
   const updateValueFromSnapshotIfDifferent = React.useCallback(
     (dataSnapshot) => {
       const snapshotValue = dataSnapshot.val()
-      if (!_.isEqual(snapshotValue, value)) setValue(snapshotValue)
+      if (R.equal(value, snapshotValue)) setValue(snapshotValue)
     },
     [value]
   )
