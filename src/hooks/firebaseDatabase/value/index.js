@@ -51,12 +51,12 @@ function useFirebaseDatabaseValue(path, {
     }
 
 
-    reference.on('value', (setValueFromSnapshot))
+    reference.on('value', setValueFromSnapshot)
 
     return function cleanup() {
       reference.off('value', setValueFromSnapshot)
     }
-  }, [setValue])
+  }, [firebase, path, setValue])
 
   return value
 }
