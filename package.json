@@ -1,6 +1,6 @@
 {
   "name": "provide-firebase-middleware",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "Firebase context provider and Redux middleware",
   "main": "dist/index.js",
   "scripts": {

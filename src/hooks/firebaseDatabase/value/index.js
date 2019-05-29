@@ -46,7 +46,7 @@ function useFirebaseDatabaseValue(path, {
       reference = reference.startAt(startAt)
     } else if (endAt) {
       reference = reference.endAt(endAt)
-    } else if (equalTo) {
+    } else if (!R.isNil(equalTo)) { // so you can filter by falsey value
       reference = reference.equalTo(equalTo)
     }
 
