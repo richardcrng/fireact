@@ -7,7 +7,12 @@ function useFirebaseDatabaseValue(path, {
   orderByChild,     // string
   orderByKey,       // boolean
   orderByValue,     // boolean
-  orderByPriority   // boolean
+  orderByPriority,  // boolean
+  limitToFirst,     // number
+  limitToLast,      // number
+  startAt,          // number | string | boolean
+  endAt,            // number | string | boolean
+  equalTo           // any
 } = {}) {
   const firebase = useFirebaseContext()
 
@@ -21,6 +26,7 @@ function useFirebaseDatabaseValue(path, {
   React.useEffect(() => {
     let reference = firebase.database().ref(path)
 
+    // order-by methods
     if (orderByChild) {
       reference = reference.orderByChild(orderByChild)
     } else if (orderByKey) {
@@ -30,6 +36,20 @@ function useFirebaseDatabaseValue(path, {
     } else if (orderByPriority) {
       reference = reference.orderByPriority()
     }
+
+    // query methods
+    if (limitToFirst) {
+      reference = reference.limitToFirst(limitToFirst)
+    } else if (limitToLast) {
+      reference = reference.limitToLast(limitToLast)
+    } else if (startAt) {
+      reference = reference.startAt(startAt)
+    } else if (endAt) {
+      reference = reference.endAt(endAt)
+    } else if (equalTo) {
+      reference = reference.equalTo(equalTo)
+    }
+
 
     reference.on('value', (setValueFromSnapshot))
 
