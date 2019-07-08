@@ -1,5 +1,5 @@
 import React from 'react';
-import FirebaseContext from '../../context';
+import FirebaseContext from '../../FirebaseContext';
 
 function useFirebaseContext() {
   return React.useContext(FirebaseContext)
