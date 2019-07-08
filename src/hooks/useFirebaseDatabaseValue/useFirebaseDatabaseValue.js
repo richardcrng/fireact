@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import useFirebase from '../useFirebase';
-import useStateHandlers from '../stateHandlers';
+import useStateHandlers from '../useStateHandlers';
 
 function useFirebaseDatabaseValue(path, {
   orderByChild,     // string
