@@ -1,18 +1,18 @@
-
-import provideFirebaseMiddleware from './middleware';
-import references from './references';
-import writes from './writes';
+import Fireact from './main';
 import useFirebase from './hooks';
 import useFirebaseCurrentUser from './hooks';
 import useFirebaseDatabaseValue from './hooks';
 
+import references from './references';
+import writes from './writes';
+
+
 
 export * from './utils'
 
-export {
-  provideFirebaseMiddleware as default,
-  provideFirebaseMiddleware,
+export default Fireact
 
+export {
   // hooks
   useFirebase,
   useFirebaseCurrentUser,

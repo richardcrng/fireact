@@ -1,3 +1,10 @@
-import provideFirebaseMiddleware from "./provideFirebaseMiddleware";
+import Fireact from "./Fireact";
+import makeFirebaseMiddleware from './makeFirebaseMiddleware';
+import makeFirebaseProvider from './makeFirebaseProvider';
 
-export default provideFirebaseMiddleware
+export default Fireact
+
+export {
+  makeFirebaseMiddleware,
+  makeFirebaseProvider
+}
