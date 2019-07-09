@@ -1,7 +1,7 @@
 {
   "name": "fireact",
   "version": "0.0.1",
-  "description": "Firebase context provider and Redux middleware",
+  "description": "Hooks, middleware and helpers for using Firebase with React",
   "main": "dist/index.js",
   "scripts": {
     "build": "npx babel src --out-dir dist",
