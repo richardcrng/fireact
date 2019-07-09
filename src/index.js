@@ -1,20 +1,26 @@
-import {
-  useFirebaseContext,
-} from './hooks';
+import Fireact from './main';
+import useFirebase from './hooks';
+import useFirebaseCurrentUser from './hooks';
+import useFirebaseDatabaseValue from './hooks';
 
-import provideFirebaseMiddleware from './middleware';
 import references from './references';
 import writes from './writes';
+import { generatePushID } from './utils';
 
-const useFirebase = useFirebaseContext
+Fireact.generatePushID = generatePushID
+Fireact.useFirebase = useFirebase
+Fireact.useFirebaseCurrentUser = useFirebaseCurrentUser
+Fireact.useFirebaseDatabaseValue = useFirebaseDatabaseValue
 
-export * from './hooks'
-export * from './utils'
+export default Fireact
 
 export {
-  provideFirebaseMiddleware as default,
-  provideFirebaseMiddleware,
+  // hooks
   useFirebase,
+  useFirebaseCurrentUser,
+  useFirebaseDatabaseValue,
+
+  // misc
   references,
   writes
 }

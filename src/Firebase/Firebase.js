@@ -36,7 +36,7 @@ class Firebase {
         // Require the specific product
         const firebaseProduct = firebase[moduleName]
         this[moduleName] = firebaseProduct
-        
+
         // Initialise as capitalised if appropriate
         if (typeof firebaseProduct === "function") {
           this[_.capitalize(moduleName)] = firebaseProduct()

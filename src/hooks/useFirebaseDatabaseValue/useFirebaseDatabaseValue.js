@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
-import { useFirebaseContext } from "../../../hooks";
-import useStateHandlers from '../../stateHandlers';
+import useFirebase from '../useFirebase';
+import useStateHandlers from '../useStateHandlers';
 
 function useFirebaseDatabaseValue(path, {
   orderByChild,     // string
@@ -14,7 +14,7 @@ function useFirebaseDatabaseValue(path, {
   endAt,            // number | string | boolean
   equalTo           // any
 } = {}) {
-  const firebase = useFirebaseContext()
+  const firebase = useFirebase()
 
   const [value, { set: setValue }] = useStateHandlers()
 

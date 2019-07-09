@@ -1,8 +1,8 @@
 import React from 'react';
-import useFirebaseContext from '../firebaseContext';
+import { useFirebase } from '../useFirebase';
 
-function useFirebaseUser() {
-  const firebase = useFirebaseContext()
+function useFirebaseCurrentUser() {
+  const firebase = useFirebase
   const [user, setUser] = React.useState(firebase.auth().currentUser)
 
   React.useEffect(() => {
@@ -17,4 +17,4 @@ function useFirebaseUser() {
   return user
 }
 
-export default useFirebaseUser;
+export default useFirebaseCurrentUser;

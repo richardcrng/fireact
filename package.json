@@ -1,6 +1,6 @@
 {
-  "name": "provide-firebase-middleware",
-  "version": "0.0.22",
+  "name": "fireact",
+  "version": "0.0.1",
   "description": "Firebase context provider and Redux middleware",
   "main": "dist/index.js",
   "scripts": {
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/richardcrng/provide-firebase-middleware.git"
+    "url": "git+https://github.com/richardcrng/fireact.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/richardcrng/provide-firebase-middleware/issues"
+    "url": "https://github.com/richardcrng/fireact/issues"
   },
-  "homepage": "https://github.com/richardcrng/provide-firebase-middleware#readme",
+  "homepage": "https://github.com/richardcrng/fireact#readme",
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.4",

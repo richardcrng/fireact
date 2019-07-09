@@ -1,15 +1,11 @@
-import useFirebaseProvider from './firebaseProvider';
-import useFirebaseContext from './firebaseContext';
-import { useFirebaseDatabaseValue } from './firebaseDatabase';
-import useFirebaseUser from './firebaseUser';
-import useFirebaseUserUid from './firebaseUserUid';
-import useStateHandlers from './stateHandlers';
+import useFirebase from './useFirebase';
+import useFirebaseCurrentUser from './useFirebaseCurrentUser';
+import useFirebaseDatabaseValue from './useFirebaseDatabaseValue';
+import useFirebaseProvider from './useFirebaseProvider';
 
 export {
-  useFirebaseContext,
-  useFirebaseUser,
-  useFirebaseUserUid,
+  useFirebase,
+  useFirebaseCurrentUser,
   useFirebaseDatabaseValue,
-  useFirebaseProvider,
-  useStateHandlers
+  useFirebaseProvider
 }
