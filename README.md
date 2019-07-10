@@ -32,3 +32,52 @@ const {
 } = Fireact(config, products)
 ```
 
+## Hooks
+
+### `useFirebase()`
+#### Returns
+The `firebase` object initialised by Fireact.
+
+#### Example
+```js
+import React from 'react'
+import { useFirebase } from 'fireact'
+
+function Component() {
+  const firebase = useFirebase()
+
+  // other stuff
+}
+```
+
+### `useFirebaseCurrentUser()`
+#### Retrns
+The current user from Firebase Authentication, if there is one.
+
+#### Example
+```js
+import React from 'react'
+import { useFirebaseCurrentUser } from 'fireact'
+
+function Component() {
+  const user = useFirebaseCurrentUser()
+
+  // other stuff
+}
+```
+
+### `useFirebaseDatabaseValue(path, [options = {}])`
+#### Retrns
+The current value of the Firebase Real-Time Database at `path`.
+
+#### Example
+```js
+import React from 'react'
+import { useFirebaseDatabaseValue } from 'fireact'
+
+function Component() {
+  const entry = useFirebaseDatabaseValue('arbitrary/path/to/entry')
+
+  // other stuff
+}
+```
