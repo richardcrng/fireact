@@ -1,4 +1,6 @@
 import Firebase from '../../Firebase';
+import makeFirebaseProvider from '../makeFirebaseProvider';
+import makeFirebaseMiddleware from '../makeFirebaseMiddleware';
 
 /**
  *
