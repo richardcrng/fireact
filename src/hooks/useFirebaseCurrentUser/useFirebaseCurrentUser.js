@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFirebase } from '../useFirebase';
+import useFirebase from '../useFirebase';
 
 function useFirebaseCurrentUser() {
   const firebase = useFirebase()
