@@ -1,7 +1,7 @@
 import Fireact from './main';
-import useFirebase from './hooks';
-import useFirebaseCurrentUser from './hooks';
-import useFirebaseDatabaseValue from './hooks';
+import { useFirebase } from './hooks';
+import { useFirebaseCurrentUser } from './hooks';
+import { useFirebaseDatabaseValue } from './hooks';
 
 import references from './references';
 import writes from './writes';
