@@ -2,7 +2,7 @@ import React from 'react';
 import { useFirebase } from '../useFirebase';
 
 function useFirebaseCurrentUser() {
-  const firebase = useFirebase
+  const firebase = useFirebase()
   const [user, setUser] = React.useState(firebase.auth().currentUser)
 
   React.useEffect(() => {
