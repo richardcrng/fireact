@@ -14,22 +14,15 @@ const loadFirebaseModule = (product: FirebaseProduct) => {
   }
 }
 
-const firebaseModules: FirebaseProduct[] = ['auth', 'database', 'firestore', 'functions', 'messaging', 'storage']
-
 class Firebase {
-  app: Function
-  auth?: Function
-  database?: Function
-  firestore?: Function
-  functions?: Function
-  messaging?: Function
-  storage?: Function
+  app: typeof firebase.app
+  auth: typeof firebase.auth
+  database: typeof firebase.database
+  firestore: typeof firebase.firestore
+  functions: typeof firebase.functions
+  messaging: typeof firebase.messaging
+  storage: typeof firebase.storage
 
-  /**
-   * 
-   * @param {FirebaseConfig} config - Firebase Configuration options
-   * @param {FirebaseProduct[]} products - Firebase Products to initialise
-   */
   constructor(config: FirebaseConfig, products: FirebaseProduct[] = []) {
     products.forEach(loadFirebaseModule)
 
@@ -38,12 +31,12 @@ class Firebase {
 
     // Construct services
     this.app = firebase.app
-
-    for (let moduleName of firebaseModules) {
-      if (products.includes(moduleName)) {
-        this[moduleName] = firebase[moduleName]
-      }
-    }
+    this.auth = firebase.auth
+    this.database = firebase.database
+    this.firestore = firebase.firestore
+    this.functions = firebase.functions
+    this.messaging = firebase.messaging
+    this.storage = firebase.storage
   }
 }
 
