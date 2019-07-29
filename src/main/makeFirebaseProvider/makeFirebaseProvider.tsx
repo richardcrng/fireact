@@ -1,8 +1,8 @@
 import * as React from 'react';
-import Firebase from '../../Firebase';
+import Firebase from '../../types/Firebase';
 import FirebaseContext from '../../FirebaseContext';
 
-function makeFirebaseProvider(firebase: typeof Firebase) {
+function makeFirebaseProvider(firebase: Firebase) {
   const FirebaseProvider: React.FunctionComponent = ({ children }) => {
     return (
       <FirebaseContext.Provider value={firebase}>
