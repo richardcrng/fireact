@@ -15,6 +15,8 @@ Fireact.useFirebaseDatabaseValue = useFirebaseDatabaseValue
 export default Fireact
 
 export {
+  generatePushID,
+
   // hooks
   useFirebase,
   useFirebaseCurrentUser,
