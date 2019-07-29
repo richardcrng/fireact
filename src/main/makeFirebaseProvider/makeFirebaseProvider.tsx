@@ -3,13 +3,15 @@ import Firebase from '../../Firebase';
 import FirebaseContext from '../../FirebaseContext';
 
 function makeFirebaseProvider(firebase: typeof Firebase) {
-  return function FirebaseProvider({ children }) {
+  const FirebaseProvider: React.FunctionComponent = ({ children }) => {
     return (
       <FirebaseContext.Provider value={firebase}>
         {children}
       </FirebaseContext.Provider>
     )
   }
+
+  return FirebaseProvider
 }
 
 export default makeFirebaseProvider;
