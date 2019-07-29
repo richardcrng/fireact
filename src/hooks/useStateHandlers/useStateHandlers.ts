@@ -1,10 +1,16 @@
 import R from 'ramda';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 
-function useStateHandlers<T>(initialState: T) {
-  const [state, setState] = React.useState<T>(initialState)
+interface StateHandlers<T> {
+  set: R.Arity1Fn
+  update: (props?: object) => void
+  replace: Dispatch<SetStateAction<T | undefined>>
+}
 
-  const updateState = (props: object) => setState(prevState => ({ ...prevState, ...props }))
+function useStateHandlers<T>(initialState?: T) : [T | undefined, StateHandlers<T>] {
+  const [state, setState] = React.useState<T | undefined>(initialState)
+
+  const updateState = (props?: object) => setState(prevState => ({ ...Object(prevState), ...props }))
 
   const setStateIfNew = R.ifElse(
     R.equals(state),    // if argument is equal to state...
