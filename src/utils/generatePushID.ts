@@ -10,7 +10,7 @@
  *    latter ones will sort after the former ones.  We do this by using the previous random bits
  *    but "incrementing" them by 1 (only in the case of a timestamp collision).
  */
-export const generatePushID = (function () {
+export const generatePushID: () => string = (function () {
   // Modeled after base64 web-safe chars, but ordered by ASCII.
   var PUSH_CHARS = '-0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz';
 
@@ -21,7 +21,7 @@ export const generatePushID = (function () {
   // timestamp to prevent collisions with other clients.  We store the last characters we
   // generated because in the event of a collision, we'll use those same characters except
   // "incremented" by one.
-  var lastRandChars = [];
+  var lastRandChars: any[] = [];
 
   return function () {
     var now = new Date().getTime();
