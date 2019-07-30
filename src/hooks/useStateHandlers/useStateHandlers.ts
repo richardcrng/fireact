@@ -1,4 +1,4 @@
-import R from 'ramda';
+import * as R from 'ramda';
 import React, { Dispatch, SetStateAction } from 'react';
 
 interface StateHandlers<T> {
@@ -7,7 +7,7 @@ interface StateHandlers<T> {
   replace: Dispatch<SetStateAction<T | undefined>>
 }
 
-function useStateHandlers<T>(initialState?: T) : [T | undefined, StateHandlers<T>] {
+function useStateHandlers<T>(initialState?: T): [T | undefined, StateHandlers<T>] {
   const [state, setState] = React.useState<T | undefined>(initialState)
 
   const updateState = (props?: object) => setState(prevState => ({ ...Object(prevState), ...props }))
