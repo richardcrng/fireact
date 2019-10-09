@@ -96,3 +96,8 @@ function Component() {
 | `orderByKey` | boolean | If true, orders the data by key | [`firebase.database.Reference.orderByKey`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bykey) |
 | `orderByPriority` | boolean | If true, orders the data by priority | [`firebase.database.Reference.orderByPriority`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bypriority) |
 | `orderByValue` | boolean | If true, orders the data by value | [`firebase.database.Reference.orderByValue`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-byvalue) |
+| `limitToFirst` | number | Retrieves only the first `limitToFirst` number of children | [`firebase.database.Reference.limitToFirst`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#limit-tofirst) |
+| `limitToLast` | number | Retrieves only the last `limitToLast` number of children | [`firebase.database.Reference.limitToLast`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#limit-tolast) |
+| `startAt` | number, string or boolean |  | [`firebase.database.Reference.startAt`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#start-at) |
+| `endAt` | number, string or boolean |  | [`firebase.database.Reference.endAt`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#end-at) |
+| `equalTo` | number, string or boolean |  | [`firebase.database.Reference.equalTo`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#equal-to) |
