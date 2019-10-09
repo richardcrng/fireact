@@ -33,6 +33,7 @@ const {
 ```
 
 ## Hooks
+Hooks can be used inside any component that has `Provider` wrapped around it.
 
 ### `useFirebase()`
 #### Returns
@@ -46,7 +47,8 @@ import { useFirebase } from 'fireact'
 function Component() {
   const firebase = useFirebase()
 
-  // other stuff
+  // exposes the JS Firebase API
+  // docs at https://firebase.google.com/docs/reference/js/
 }
 ```
 
@@ -62,7 +64,8 @@ import { useFirebaseCurrentUser } from 'fireact'
 function Component() {
   const user = useFirebaseCurrentUser()
 
-  // other stuff
+  // exposes the firebase.User object for the current Firebase user
+  // docs at https://firebase.google.com/docs/reference/js/firebase.User.html
 }
 ```
 
@@ -78,6 +81,6 @@ import { useFirebaseDatabaseValue } from 'fireact'
 function Component() {
   const entry = useFirebaseDatabaseValue('arbitrary/path/to/entry')
 
-  // other stuff
+  // exposes the JS value from the Firebase RTD database location of path
 }
 ```
