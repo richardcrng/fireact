@@ -33,6 +33,7 @@ const {
 ```
 
 ## Hooks
+Hooks can be used inside any component that has `Provider` wrapped around it.
 
 ### `useFirebase()`
 #### Returns
@@ -46,7 +47,8 @@ import { useFirebase } from 'fireact'
 function Component() {
   const firebase = useFirebase()
 
-  // other stuff
+  // exposes the JS Firebase API
+  // docs at https://firebase.google.com/docs/reference/js/
 }
 ```
 
@@ -62,12 +64,17 @@ import { useFirebaseCurrentUser } from 'fireact'
 function Component() {
   const user = useFirebaseCurrentUser()
 
-  // other stuff
+  // exposes the firebase.User object for the current Firebase user
+  // docs at https://firebase.google.com/docs/reference/js/firebase.User.html
 }
 ```
 
 ### `useFirebaseDatabaseValue(path, [options = {}])`
-#### Retrns
+#### Parameters
+* `path` *(string)*: path to a value in the Firebase Real-Time Database
+* `options` *(object, optional)*: a configuration object for sorting and filtering
+
+#### Returns
 The current value of the Firebase Real-Time Database at `path`.
 
 #### Example
@@ -78,6 +85,19 @@ import { useFirebaseDatabaseValue } from 'fireact'
 function Component() {
   const entry = useFirebaseDatabaseValue('arbitrary/path/to/entry')
 
-  // other stuff
+  // exposes the JS value from the Firebase RTD database location of path
 }
 ```
+
+#### `options` object: sorting and filtering
+| Key | Value (type) | Description | Firebase Docs |
+| --- | --- | --- | --- |
+| `orderByChild` | string | Uses the given value as a child key to order the data | [`firebase.database.Reference.orderByChild`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bychild) |
+| `orderByKey` | boolean | If true, orders the data by key | [`firebase.database.Reference.orderByKey`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bykey) |
+| `orderByPriority` | boolean | If true, orders the data by priority | [`firebase.database.Reference.orderByPriority`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bypriority) |
+| `orderByValue` | boolean | If true, orders the data by value | [`firebase.database.Reference.orderByValue`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-byvalue) |
+| `limitToFirst` | number | Retrieves only the first `limitToFirst` number of children | [`firebase.database.Reference.limitToFirst`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#limit-tofirst) |
+| `limitToLast` | number | Retrieves only the last `limitToLast` number of children | [`firebase.database.Reference.limitToLast`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#limit-tolast) |
+| `startAt` | number, string or boolean |  | [`firebase.database.Reference.startAt`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#start-at) |
+| `endAt` | number, string or boolean |  | [`firebase.database.Reference.endAt`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#end-at) |
+| `equalTo` | number, string or boolean |  | [`firebase.database.Reference.equalTo`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#equal-to) |
