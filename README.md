@@ -94,3 +94,5 @@ function Component() {
 | --- | --- | --- |
 | `orderByChild` | string | Uses the given value as a child key to order the data | [`firebase.database.Reference.orderByChild`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bychild) |
 | `orderByKey` | boolean | If true, orders the data by key | [`firebase.database.Reference.orderByKey`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bykey) |
+| `orderByPriority` | boolean | If true, orders the data by priority | [`firebase.database.Reference.orderByPriority`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bypriority) |
+| `orderByValue` | boolean | If true, orders the data by value | [`firebase.database.Reference.orderByValue`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-byvalue) |
