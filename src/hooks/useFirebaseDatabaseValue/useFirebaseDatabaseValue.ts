@@ -3,6 +3,8 @@ import React from 'react';
 import useFirebase from '../useFirebase';
 import useStateHandlers from '../useStateHandlers';
 
+// https://firebase.google.com/docs/reference/js/firebase.database.Query.html
+
 interface DatabaseValueOptions {
   orderByChild?: string
   orderByKey?: boolean

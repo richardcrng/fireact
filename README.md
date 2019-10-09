@@ -70,7 +70,11 @@ function Component() {
 ```
 
 ### `useFirebaseDatabaseValue(path, [options = {}])`
-#### Retrns
+#### Parameters
+* `path` *(string)*: path to a value in the Firebase Real-Time Database
+* `options` *(object, optional)*: a configuration object for sorting and filtering
+
+#### Returns
 The current value of the Firebase Real-Time Database at `path`.
 
 #### Example
@@ -84,3 +88,9 @@ function Component() {
   // exposes the JS value from the Firebase RTD database location of path
 }
 ```
+
+#### `options` object: sorting and filtering
+| Key | Value (type) | Description | Firebase Docs |
+| --- | --- | --- |
+| `orderByChild` | string | Uses the given value as a child key to order the data | [`firebase.database.Reference.orderByChild`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bychild) |
+| `orderByKey` | boolean | If true, orders the data by key | [`firebase.database.Reference.orderByKey`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#order-bykey) |
