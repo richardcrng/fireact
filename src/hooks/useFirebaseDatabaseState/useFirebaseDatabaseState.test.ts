@@ -49,6 +49,46 @@ describe('Retrieving a value from a database', () => {
 
         expect(result.current[0]).toBe(2)
       })
+
+      it('Can update state through the transaction property of the first element', async () => {
+        const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
+
+        await act(async () => {
+          await result.current[1].transaction((num: number) => num + 1)
+          await delay(1000)
+        })
+
+        expect(result.current[0]).toBe(3)
+      })
+    })
+
+    describe("WHEN path is 'useFirebaseDatabaseState/nested", () => {
+      const path = 'useFirebaseDatabaseState/nested' // identifier for something in the database
+
+      afterAll(() => {
+        firebase.database().ref(path).set({ boolean: false, string: 'foobar' })
+      })
+
+      it('Has the current value of the state as the zeroth element of the return value', async () => {
+        const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
+
+        await act(async () => {
+          await delay(1000)
+        })
+
+        expect(result.current[0]).toEqual({ boolean: false, string: 'foobar' })
+      })
+
+      it('Can update state through the update property of the first element', async () => {
+        const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
+
+        await act(async () => {
+          await result.current[1].update({ string: 'FOO BAR' })
+          await delay(1000)
+        })
+
+        expect(result.current[0]).toEqual({ boolean: false, string: 'FOO BAR' })
+      })
     })
   })
 })
