@@ -7,11 +7,12 @@ export const delay = (ms: number) =>
     }, ms);
   });
 
+let firebaseTestVariable: any
 
-export const firebaseDatabaseVal = async (path: string, firebase: Firebase) => {
-  let val
+export const getTestVal = () => firebaseTestVariable 
+
+export const refreshTestValFromFirebase = async (path: string, firebase: Firebase) => {
   await firebase.database().ref(path).on('value', dataSnapshot => {
-    val = dataSnapshot.val()
+    firebaseTestVariable = dataSnapshot.val()
   })
-  return val
 }
