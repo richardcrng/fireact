@@ -1,5 +1,5 @@
-import { FirebaseConfig, FirebaseProduct } from "../../types"
 import Fireact from "./Fireact"
+import { FirebaseConfig, FirebaseProduct } from "../../types"
 
 // .env has the config variables in
 require('dotenv').config()
