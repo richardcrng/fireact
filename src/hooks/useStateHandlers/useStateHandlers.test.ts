@@ -69,24 +69,23 @@ describe('set handler', () => {
 })
 
 
-describe('update handler updates properties within object state', () => {
-  describe('GIVEN initial state of an object, { counter: 1, boolean: true }', () => {
-    const initialState = { counter: 1, boolean: true }
+describe('update handler', () => {
+  describe('updates properties within state', () => {
+    test("state updates properties passed in and preserves properties not passed in", async () => {
+      const nums = [1, 2, 3]
+      const initialState = { counter: 1, array: nums }
+      const { result } = renderHook(() => useStateHandlers(initialState))
 
-    describe('WHEN useStateHandlers is passed this initialState', () => {
+      expect(result.current[0]).toBe(initialState)
 
-      describe('AND when the update handler is passed { counter: 2 }', () => {
-        it('THEN the state updates appropriately', async () => {
-          const { result } = renderHook(() => useStateHandlers(initialState))
-
-          await act(async () => {
-            result.current[1].update({ counter: 2 })
-            await delay(1000)
-          })
-
-          expect(result.current[0]).toEqual({ counter: 2, boolean: true })
-        })
+      await act(async () => {
+        result.current[1].update({ counter: 2 })
+        await delay(100)
       })
+
+      expect(result.current[0]).not.toBe(initialState)
+      expect(result.current[0]).toEqual({ counter: 2, array: [1, 2, 3] })
+      expect(result.current[0].array).toBe(nums)
     })
   })
 })
