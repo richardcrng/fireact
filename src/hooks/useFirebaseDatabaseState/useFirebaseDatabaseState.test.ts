@@ -29,7 +29,7 @@ describe('Retrieving a value from a database', () => {
         firebase.database().ref(path).set(1)
       })
 
-      it('Has the current value of the state as the first element of the return value', async () => {
+      it('Has the current value of the state as the zeroth element of the return value', async () => {
         const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
 
         await act(async () => {
@@ -37,6 +37,17 @@ describe('Retrieving a value from a database', () => {
         })
 
         expect(result.current[0]).toBe(1)
+      })
+
+      it('Can update state through the set property of the first element', async () => {
+        const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
+
+        await act(async () => {
+          await result.current[1].set(2)
+          await delay(1000)
+        })
+
+        expect(result.current[0]).toBe(2)
       })
     })
   })

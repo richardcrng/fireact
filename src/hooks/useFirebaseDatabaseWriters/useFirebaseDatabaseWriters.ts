@@ -1,7 +1,8 @@
 import * as R from 'ramda'
 import useFirebase from '../useFirebase';
+import { FirebaseDatabaseWriters } from '../../types';
 
-function useFirebaseDatabaseWriters(path: string) {
+function useFirebaseDatabaseWriters<T = any>(path: string): FirebaseDatabaseWriters<T> {
   const firebase = useFirebase()
 
   const fallbackHandlers = {
