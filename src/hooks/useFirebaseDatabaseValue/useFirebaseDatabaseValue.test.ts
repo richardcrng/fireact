@@ -18,56 +18,99 @@ const config: FirebaseConfig = {
 
 const products: FirebaseProduct[] = ['auth', 'database']
 
-describe('GIVEN a config and products of auth and database passed to Firebase', () => {
-  const fireactResult = Fireact(config, products)
+describe('Retrieving a value from a database', () => {
+  describe('GIVEN a config and products of auth and database passed to Firebase', () => {
+    const fireactResult = Fireact(config, products)
 
-  describe('AND Provider is destructured from the fireactResult', () => {
-    const { Provider } = fireactResult
+    describe('AND Provider is destructured from the fireactResult', () => {
+      const { Provider } = fireactResult
 
-    describe("WHEN path is 'useFirebaseDatabaseValue/boolean", () => {
-      const path = 'useFirebaseDatabaseValue/boolean' // identifier for something in the database
+      describe("WHEN path is 'useFirebaseDatabaseValue/boolean", () => {
+        const path = 'useFirebaseDatabaseValue/boolean' // identifier for something in the database
 
-      describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
-        const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
+        describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
+          const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
 
-        it('THEN, after a short wait, the current value is true', async () => {  
-          // A delay needed as value syncs up with Firebase realtime database
-          await act(async () => {
-            await delay(1000)
+          it('THEN, after a short wait, the current value is true', async () => {
+            // A delay needed as value syncs up with Firebase realtime database
+            await act(async () => {
+              await delay(1000)
+            })
+            expect(result.current).toBe(true)
           })
-          expect(result.current).toBe(true)
+        })
+      })
+
+      describe("WHEN path is 'useFirebaseDatabaseValue/counter", () => {
+        const path = 'useFirebaseDatabaseValue/counter' // identifier for something in the database
+
+        describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
+          const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
+
+          it('THEN, after a short wait, the current value is 1', async () => {
+            // A delay needed as value syncs up with Firebase realtime database
+            await act(async () => {
+              await delay(1000)
+            })
+            expect(result.current).toBe(1)
+          })
+        })
+      })
+
+      describe("WHEN path is 'useFirebaseDatabaseValue/nested", () => {
+        const path = 'useFirebaseDatabaseValue/nested' // identifier for something in the database
+
+        describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
+          const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
+
+          it('THEN, after a short wait, the current value is an object', async () => {
+            // A delay needed as value syncs up with Firebase realtime database
+            await act(async () => {
+              await delay(1000)
+            })
+            expect(result.current).toEqual({ deep: false, string: 'foobar' })
+          })
         })
       })
     })
+  })
+})
 
-    describe("WHEN path is 'useFirebaseDatabaseValue/counter", () => {
-      const path = 'useFirebaseDatabaseValue/counter' // identifier for something in the database
+describe('Listening for updates to a value from a database', () => {
+  describe('GIVEN a config and products of auth and database passed to Firebase', () => {
+    const fireactResult = Fireact(config, products)
 
-      describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
-        const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
+    describe('AND Provider is destructured from the fireactResult', () => {
+      const { firebase, Provider } = fireactResult
 
-        it('THEN, after a short wait, the current value is 1', async () => {
-          // A delay needed as value syncs up with Firebase realtime database
-          await act(async () => {
-            await delay(1000)
+      describe("WHEN path is 'useFirebaseDatabaseValue/variable", () => {
+        const path = 'useFirebaseDatabaseValue/variable' // identifier for something in the database
+
+        describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
+          afterAll(() => {
+            firebase.database().ref(path).set(true)
           })
-          expect(result.current).toBe(1)
-        })
-      })
-    })
 
-    describe("WHEN path is 'useFirebaseDatabaseValue/nested", () => {
-      const path = 'useFirebaseDatabaseValue/nested' // identifier for something in the database
-
-      describe('AND Provider is used as a wrapper for useFirebaseDatabaseValue at this path', () => {
-        const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
-
-        it('THEN, after a short wait, the current value is an object', async () => {
-          // A delay needed as value syncs up with Firebase realtime database
-          await act(async () => {
-            await delay(1000)
+          it('THEN, after a short wait, the current value is true', async () => {
+            const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
+            
+            // A delay needed as value syncs up with Firebase realtime database
+            await act(async () => {
+              await delay(1000)
+            })
+            expect(result.current).toBe(true)
           })
-          expect(result.current).toEqual({ deep: false, string: 'foobar' })
+
+          it('AND, once the database has been updated, the current value is false', async () => {
+            const { result } = renderHook(() => useFirebaseDatabaseValue(path), { wrapper: Provider })
+
+            // A delay needed as value syncs up with Firebase realtime database
+            await act(async () => {
+              await firebase.database().ref(path).set(false)
+              await delay(1000)
+            })
+            expect(result.current).toBe(false)
+          })
         })
       })
     })
