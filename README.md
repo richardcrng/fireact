@@ -69,7 +69,29 @@ function Component() {
 }
 ```
 
+### `useFirebaseDatabaseState(path, [options = {}])`
+#### Parameters
+* `path` *(string)*: path to a value in the Firebase Real-Time Database
+* `options` *(object, optional)*: a configuration object for sorting and filtering
 
+#### Returns
+An array with two elements:
+1. The current value of the Firebase Real-Time Database at `path`; and 
+2. An object of functions which can be used to write to Firebase Real-Time Database at `path`.
+
+These are the two return values, respectively, from [`useFirebaseDatabaseValue`](##usefirebasedatabasevaluepath-options--) and [`useFirebaseDatabaseWriters`](#usefirebasedatabasewriterspath).
+
+#### Example
+```js
+import React from 'react'
+import { useFirebaseDatabaseState } from 'fireact'
+
+function Component() {
+  const [value, { set, transaction, update }] = useFirebaseDatabaseState('arbitrary/path/to/entry')
+
+  // your logic here
+}
+```
 
 ### `useFirebaseDatabaseValue(path, [options = {}])`
 #### Parameters
@@ -110,6 +132,7 @@ function Component() {
 
 #### Returns
 An object of functions which can be used to write to Firebase Real-Time Database at `path`:
+
 | Function | Description | Firebase Docs |
 | --- | --- | --- |
 | `set` | Takes a value and updates the RTD to the given value at `path` | [`firebase.database.Reference.set`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#set) |
