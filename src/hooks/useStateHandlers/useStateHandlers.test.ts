@@ -90,25 +90,36 @@ describe('update handler', () => {
   })
 })
 
-describe('replace handler changes the reference value of state', () => {
-  describe('GIVEN initial state of an object, { counter: 1, boolean: true }', () => {
-    const initialState = { counter: 1, boolean: true }
+describe('replace handler', () => {
+  describe('updates the reference even when passed something of value equality', () => {
+    test("state refers to a different object if replace is passed an array with the same values", async () => {
+      const initialState = [1, 2, 3]
+      const { result } = renderHook(() => useStateHandlers(initialState))
 
-    describe('WHEN useStateHandlers is passed this initialState', () => {
+      expect(result.current[0]).toBe(initialState)
 
-      describe('AND when the update handler is passed { counter: 1, boolean: true }', () => {
-        it('THEN the state is a new object with the same values', async () => {
-          const { result } = renderHook(() => useStateHandlers(initialState))
-
-          await act(async () => {
-            result.current[1].replace({ counter: 1, boolean: true })
-            await delay(1000)
-          })
-
-          expect(result.current[0]).not.toBe(initialState)
-          expect(result.current[0]).toEqual({ counter: 1, boolean: true })
-        })
+      await act(async () => {
+        result.current[1].replace([1, 2, 3])
+        await delay(100)
       })
+
+      expect(result.current[0]).not.toBe(initialState)
+      expect(result.current[0]).toEqual([1, 2, 3])
+    })
+
+    test("state refers to a different object if replace is passed an object with the same key-value pairs", async () => {
+      const initialState = { counter: 1, boolean: true }
+      const { result } = renderHook(() => useStateHandlers(initialState))
+
+      expect(result.current[0]).toBe(initialState)
+
+      await act(async () => {
+        result.current[1].replace({ counter: 1, boolean: true })
+        await delay(100)
+      })
+
+      expect(result.current[0]).not.toBe(initialState)
+      expect(result.current[0]).toEqual({ counter: 1, boolean: true })
     })
   })
 })
