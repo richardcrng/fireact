@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { FirebaseConfig, FirebaseProduct } from '../../types';
 import Fireact from '../../';
 import useFirebaseDatabaseWriters from './useFirebaseDatabaseWriters';
-import { firebaseDatabaseVal } from '../testUtils';
+import { delay } from '../testUtils';
 
 // .env has the config variables in
 require('dotenv').config()
@@ -37,11 +37,19 @@ describe('set handler updates value', () => {
           it('THEN, when the set handler is passed a value of false, it updates the database value at the path to false', async () => {
             let val
 
-            val = await firebaseDatabaseVal(path, firebase)
+            const refreshValFromFirebase = async () => {
+              await firebase.database().ref(path).on('value', dataSnapshot => {
+                val = dataSnapshot.val()
+              })
+            }
+
+            await refreshValFromFirebase()
+            await delay(1000)
             expect(val).toBe(true)
 
             await result.current.set(false)
-            val = await firebaseDatabaseVal(path, firebase)
+            await refreshValFromFirebase()
+            await delay(1000)
             expect(val).toBe(false)
           })
         })
