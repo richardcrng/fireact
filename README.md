@@ -1,4 +1,11 @@
 # Fireact
+## Explainer
+Fireact is a library of React hooks that provide easy access to Firebase products inside your React app.
+
+### Example use case
+With hooks like [`useFirebaseDatabaseState`](#usefirebasedatabasestatepath-options--), there's an easy API for:
+* subscribing a component to data in your Firebase Real-Time Database;
+* triggering updates to your data in your Firebase Real-Time Database.
 
 ## Installation
 ```bash
@@ -114,7 +121,7 @@ import React from 'react'
 import { useFirebaseDatabaseValue } from 'fireact'
 
 function Component() {
-  const value = useFirebaseDatabaseValue('arbitrary/path/to/value')
+  const value = useFirebaseDatabaseValue('arbitrary/path/to/entry')
 
   // exposes the JS value from the Firebase RTD database location of path
 }
@@ -156,7 +163,7 @@ function Component() {
     set,
     transaction,
     update
-  } = useFirebaseDatabaseWriters('arbitrary/path/to/value')
+  } = useFirebaseDatabaseWriters('arbitrary/path/to/entry')
 
   // functions can be executed inside a useEffect hook, component callback, etc.
 }
