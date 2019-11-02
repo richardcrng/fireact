@@ -32,6 +32,13 @@ const {
 } = Fireact(config, products)
 ```
 
+Any components that are wrapped in `Provider`, or have a parent/ancestor wrapped in `Provider`, gain access to the library's hooks.
+
+Most notable of these are:
+* [`useFirebase`](#usefirebase)
+* [`useFirebaseCurrentUser`](#usefirebasecurrentuser)
+* [`useFirebaseDatabaseState`](#usefirebasedatabasestatepath-options--)
+
 ## Hooks
 Hooks can be used inside any component that has `Provider` wrapped around it.
 
