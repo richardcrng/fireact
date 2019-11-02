@@ -13,9 +13,9 @@ function useFirebaseDatabaseWriters(path: string) {
   const reference = firebase ? firebase.database().ref(path) : fallbackHandlers
 
   return {
-    set: reference.set,
-    transaction: reference.transaction,
-    update: reference.update
+    set: reference.set.bind(reference),
+    transaction: reference.transaction.bind(reference),
+    update: reference.update.bind(reference)
   }
 }
 
