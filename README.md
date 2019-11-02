@@ -1,4 +1,11 @@
 # Fireact
+## Explainer
+Fireact is a library of React hooks that provide easy access to Firebase products inside your React app.
+
+### Example use case
+With hooks like [`useFirebaseDatabaseState`](#usefirebasedatabasestatepath-options--), there's an easy API for:
+* subscribing a component to data in your Firebase Real-Time Database;
+* triggering updates to your data in your Firebase Real-Time Database.
 
 ## Installation
 ```bash
@@ -32,6 +39,13 @@ const {
 } = Fireact(config, products)
 ```
 
+Any components that are wrapped in `Provider`, or have a parent/ancestor wrapped in `Provider`, gain access to the library's hooks.
+
+Most notable of these are:
+* [`useFirebase`](#usefirebase)
+* [`useFirebaseCurrentUser`](#usefirebasecurrentuser)
+* [`useFirebaseDatabaseState`](#usefirebasedatabasestatepath-options--)
+
 ## Hooks
 Hooks can be used inside any component that has `Provider` wrapped around it.
 
@@ -53,7 +67,7 @@ function Component() {
 ```
 
 ### `useFirebaseCurrentUser()`
-#### Retrns
+#### Returns
 The current user from Firebase Authentication, if there is one.
 
 #### Example
@@ -66,6 +80,30 @@ function Component() {
 
   // exposes the firebase.User object for the current Firebase user
   // docs at https://firebase.google.com/docs/reference/js/firebase.User.html
+}
+```
+
+### `useFirebaseDatabaseState(path, [options = {}])`
+#### Parameters
+* `path` *(string)*: path to a value in the Firebase Real-Time Database
+* `options` *(object, optional)*: a configuration object for sorting and filtering
+
+#### Returns
+An array with two elements:
+1. The current value of the Firebase Real-Time Database at `path`; and 
+2. An object of functions which can be used to write to Firebase Real-Time Database at `path`.
+
+These are the two return values, respectively, from [`useFirebaseDatabaseValue`](##usefirebasedatabasevaluepath-options--) and [`useFirebaseDatabaseWriters`](#usefirebasedatabasewriterspath).
+
+#### Example
+```js
+import React from 'react'
+import { useFirebaseDatabaseState } from 'fireact'
+
+function Component() {
+  const [value, { set, transaction, update }] = useFirebaseDatabaseState('arbitrary/path/to/entry')
+
+  // your logic here
 }
 ```
 
@@ -83,7 +121,7 @@ import React from 'react'
 import { useFirebaseDatabaseValue } from 'fireact'
 
 function Component() {
-  const entry = useFirebaseDatabaseValue('arbitrary/path/to/entry')
+  const value = useFirebaseDatabaseValue('arbitrary/path/to/entry')
 
   // exposes the JS value from the Firebase RTD database location of path
 }
@@ -101,3 +139,32 @@ function Component() {
 | `startAt` | number, string or boolean |  | [`firebase.database.Reference.startAt`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#start-at) |
 | `endAt` | number, string or boolean |  | [`firebase.database.Reference.endAt`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#end-at) |
 | `equalTo` | number, string or boolean |  | [`firebase.database.Reference.equalTo`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#equal-to) |
+
+### `useFirebaseDatabaseWriters(path)`
+#### Parameters
+* `path` *(string)*: path to a value in the Firebase Real-Time Database
+
+#### Returns
+An object of functions which can be used to write to Firebase Real-Time Database at `path`:
+
+| Function | Description | Firebase Docs |
+| --- | --- | --- |
+| `set` | Takes a value and updates the RTD to the given value at `path` | [`firebase.database.Reference.set`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#set) |
+| `transaction` | Takes a callback and updates the RTD with the return value from the callback when it is passed the RTD's current value at `path` | [`firebase.database.Reference.transaction`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#transaction) |
+| `update` | Takes an object and updates the RTD by assigning the object's key-value pairs at `path` | [`firebase.database.Reference.update`](https://firebase.google.com/docs/reference/js/firebase.database.Reference.html#update) |
+
+#### Example
+```js
+import React from 'react'
+import { useFirebaseDatabaseWriters } from 'fireact'
+
+function Component() {
+  const {
+    set,
+    transaction,
+    update
+  } = useFirebaseDatabaseWriters('arbitrary/path/to/entry')
+
+  // functions can be executed inside a useEffect hook, component callback, etc.
+}
+```

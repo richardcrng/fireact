@@ -5,7 +5,7 @@ import useStateHandlers from '../useStateHandlers';
 
 // https://firebase.google.com/docs/reference/js/firebase.database.Query.html
 
-interface DatabaseValueOptions {
+export interface DatabaseValueOptions {
   orderByChild?: string
   orderByKey?: boolean
   orderByValue?: boolean
