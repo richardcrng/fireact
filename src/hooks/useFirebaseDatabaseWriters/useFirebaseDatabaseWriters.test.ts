@@ -20,30 +20,82 @@ const products: FirebaseProduct[] = ['auth', 'database']
 
 describe('set handler updates value', () => {
   describe('GIVEN a config and products of auth and database passed to Firebase', () => {
-    const fireactResult = Fireact(config, products)
+    const { firebase, Provider } = Fireact(config, products)
 
-    describe('AND Provider is destructured from the fireactResult', () => {
-      const { firebase, Provider } = fireactResult
+    describe("WHEN path is 'useFirebaseDatabaseWriters/boolean", () => {
+      const path = 'useFirebaseDatabaseWriters/boolean' // identifier for something in the database
 
-      describe("WHEN path is 'useFirebaseDatabaseWriters/boolean", () => {
-        const path = 'useFirebaseDatabaseWriters/boolean' // identifier for something in the database
+      describe('AND Provider is used as a wrapper for useFirebaseDatabaseWriters at this path', () => {
+        afterAll(() => {
+          firebase.database().ref(path).set(true)
+        })
+        const { result } = renderHook(() => useFirebaseDatabaseWriters(path), { wrapper: Provider })
 
-        describe('AND Provider is used as a wrapper for useFirebaseDatabaseWriters at this path', () => {
-          afterAll(() => {
-            firebase.database().ref(path).set(true)
-          })
-          const { result } = renderHook(() => useFirebaseDatabaseWriters(path), { wrapper: Provider })
+        it('THEN, when the set handler is passed a value of false, it updates the database value at the path to false', async () => {
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toBe(true)
 
-          it('THEN, when the set handler is passed a value of false, it updates the database value at the path to false', async () => {
-            await refreshTestValFromFirebase(path, firebase)
-            await delay(1000)
-            expect(getTestVal()).toBe(true)
+          await result.current.set(false)
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toBe(false)
+        })
+      })
+    })
+  })
+})
 
-            await result.current.set(false)
-            await refreshTestValFromFirebase(path, firebase)
-            await delay(1000)
-            expect(getTestVal()).toBe(false)
-          })
+describe('transaction handler uses an update function', () => {
+  describe('GIVEN a config and products of auth and database passed to Firebase', () => {
+    const { firebase, Provider } = Fireact(config, products)
+
+    describe("WHEN path is 'useFirebaseDatabaseWriters/counter", () => {
+      const path = 'useFirebaseDatabaseWriters/counter' // identifier for something in the database
+
+      describe('AND Provider is used as a wrapper for useFirebaseDatabaseWriters at this path', () => {
+        afterAll(() => {
+          firebase.database().ref(path).set(1)
+        })
+        const { result } = renderHook(() => useFirebaseDatabaseWriters(path), { wrapper: Provider })
+
+        it('THEN, when the transaction handler is passed an increment function, it updates the database value by increasing by 1', async () => {
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toBe(1)
+
+          await result.current.transaction((prevCount: number) => prevCount + 1)
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toBe(2)
+        })
+      })
+    })
+  })
+})
+
+describe('update handler assigns properties', () => {
+  describe('GIVEN a config and products of auth and database passed to Firebase', () => {
+    const { firebase, Provider } = Fireact(config, products)
+
+    describe("WHEN path is 'useFirebaseDatabaseWriters/props", () => {
+      const path = 'useFirebaseDatabaseWriters/props' // identifier for something in the database
+
+      describe('AND Provider is used as a wrapper for useFirebaseDatabaseWriters at this path', () => {
+        afterAll(() => {
+          firebase.database().ref(path).update({ nested: true, string: 'foobar' })
+        })
+        const { result } = renderHook(() => useFirebaseDatabaseWriters(path), { wrapper: Provider })
+
+        it('THEN, when the update handler is passed an object, it assigns those properties at the location', async () => {
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toEqual({ nested: true, string: 'foobar' })
+
+          await result.current.update({ string: 'FOO BAR' })
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toEqual({ nested: true, string: 'FOO BAR' })
         })
       })
     })
