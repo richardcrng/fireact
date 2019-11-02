@@ -23,6 +23,20 @@ describe('GIVEN the config for a project', () => {
       it('THEN the result is an object', () => {
         expect(typeof result).toBe('object')
       })
+
+      it('AND it has properties firebase, Provider and middleware', () => {
+        expect(result.firebase).toBeDefined()
+        expect(result.Provider).toBeDefined()
+        expect(result.middleware).toBeDefined()
+      })
+
+      describe('AND Provider is destructured from the result', () => {
+        const { Provider } = result
+
+        it('THEN Provider is a function', () => {
+          expect(typeof Provider).toBe('function')
+        })
+      })
     })
   })
 })
