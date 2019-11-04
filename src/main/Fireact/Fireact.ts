@@ -1,7 +1,7 @@
 import firebase from 'firebase/app'
 import Firebase from '../../types/Firebase/';
-import FirebaseConfig from '../../types/Config';
-import FirebaseProduct from '../../types/Product';
+import FirebaseConfig from '../../types/FirebaseConfig';
+import FirebaseProduct from '../../types/FirebaseProduct';
 import makeFirebaseProvider from '../makeFirebaseProvider';
 import makeFirebaseMiddleware from '../makeFirebaseMiddleware';
 
