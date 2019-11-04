@@ -33,7 +33,7 @@ describe('Retrieving a value from a database', () => {
         const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
 
         await act(async () => {
-          await delay(1000)
+          await delay(2000)
         })
 
         expect(result.current[0]).toBe(1)
@@ -44,7 +44,7 @@ describe('Retrieving a value from a database', () => {
 
         await act(async () => {
           await result.current[1].set(2)
-          await delay(1000)
+          await delay(2000)
         })
 
         expect(result.current[0]).toBe(2)
@@ -55,7 +55,7 @@ describe('Retrieving a value from a database', () => {
 
         await act(async () => {
           await result.current[1].transaction((num: number) => num + 1)
-          await delay(1000)
+          await delay(2000)
         })
 
         expect(result.current[0]).toBe(3)
@@ -73,7 +73,7 @@ describe('Retrieving a value from a database', () => {
         const { result } = renderHook(() => useFirebaseDatabaseState(path), { wrapper: Provider })
 
         await act(async () => {
-          await delay(1000)
+          await delay(2000)
         })
 
         expect(result.current[0]).toEqual({ boolean: false, string: 'foobar' })
@@ -84,7 +84,7 @@ describe('Retrieving a value from a database', () => {
 
         await act(async () => {
           await result.current[1].update({ string: 'FOO BAR' })
-          await delay(1000)
+          await delay(2000)
         })
 
         expect(result.current[0]).toEqual({ boolean: false, string: 'FOO BAR' })

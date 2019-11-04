@@ -33,7 +33,8 @@ describe('GIVEN a config and products of auth and database passed to Firebase', 
           await firebase.auth().signInWithEmailAndPassword('test@fireact.com', 'password123')
           await delay(1000)
         })
-        expect(result.current.uid).toBe('cZBs9SAHbqXGVbdbPEdVqM9jY3b2')
+        
+        expect(result.current).toHaveProperty('uid', 'cZBs9SAHbqXGVbdbPEdVqM9jY3b2')
       })
     })
   })
