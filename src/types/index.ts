@@ -1,6 +1,6 @@
 import Firebase from './Firebase';
-import FirebaseConfig from './FirebaseConfig';
-import FirebaseProduct from './FirebaseProduct';
+import FirebaseConfig from './Config';
+import FirebaseProduct from './Product';
 import FirebaseDatabaseWriters from './FirebaseDatabaseWriters';
 
 export {
