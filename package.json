@@ -3,6 +3,9 @@
   "version": "0.1.2",
   "description": "Hooks, middleware and helpers for using Firebase with React",
   "main": "dist/index.js",
+  "jest": {
+    "rootDir": "src"
+  },
   "scripts": {
     "test": "jest --watch",
     "type-check": "tsc --noEmit",
