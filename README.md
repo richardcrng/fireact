@@ -1,4 +1,7 @@
 # Fireact
+
+[![Build Status](https://travis-ci.com/richardcrng/fireact.svg?branch=master)](https://travis-ci.com/richardcrng/fireact)
+
 ## Explainer
 Fireact is a library of React hooks that provide easy access to Firebase products inside your React app.
 
