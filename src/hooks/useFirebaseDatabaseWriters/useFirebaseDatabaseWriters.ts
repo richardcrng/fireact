@@ -8,7 +8,8 @@ function useFirebaseDatabaseWriters<T = any>(path: string): FirebaseDatabaseWrit
   const fallbackHandlers = {
     set: R.identity,
     transaction: R.identity,
-    update: R.identity
+    update: R.identity,
+    push: R.identity
   }
 
   const reference = firebase ? firebase.database().ref(path) : fallbackHandlers
@@ -16,7 +17,8 @@ function useFirebaseDatabaseWriters<T = any>(path: string): FirebaseDatabaseWrit
   return {
     set: reference.set.bind(reference),
     transaction: reference.transaction.bind(reference),
-    update: reference.update.bind(reference)
+    update: reference.update.bind(reference),
+    push: reference.push.bind(reference)
   }
 }
 
