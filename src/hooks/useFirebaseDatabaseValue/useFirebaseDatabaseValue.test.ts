@@ -34,7 +34,7 @@ describe('Retrieving a value from a database', () => {
           it('THEN, after a short wait, the current value is true', async () => {
             // A delay needed as value syncs up with Firebase realtime database
             await act(async () => {
-              await delay(1000)
+              await delay(1500)
             })
             expect(result.current).toBe(true)
           })

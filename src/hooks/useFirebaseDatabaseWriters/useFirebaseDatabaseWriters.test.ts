@@ -101,3 +101,31 @@ describe('update handler assigns properties', () => {
     })
   })
 })
+
+describe('push handler creates a new property with given value', () => {
+  describe('GIVEN a config and products of auth and database passed to Firebase', () => {
+    const { firebase, Provider } = Fireact(config, products)
+
+    describe("WHEN path is 'useFirebaseDatabaseWriters/arrayLike", () => {
+      const path = 'useFirebaseDatabaseWriters/arrayLike' // identifier for something in the database
+
+      describe('AND Provider is used as a wrapper for useFirebaseDatabaseWriters at this path', () => {
+        afterAll(() => {
+          firebase.database().ref(path).set(null)
+        })
+        const { result } = renderHook(() => useFirebaseDatabaseWriters(path), { wrapper: Provider })
+
+        it('THEN, when the push handler is passed an object, it assigns those properties at the location', async () => {
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(getTestVal()).toBeNull()
+
+          await result.current.push('my thing')
+          await refreshTestValFromFirebase(path, firebase)
+          await delay(1000)
+          expect(Object.values(getTestVal())).toContain('my thing')
+        })
+      })
+    })
+  })
+})
