@@ -10,16 +10,15 @@ function useFirebaseDatabaseWriters<T = any>(path: string): FirebaseDatabaseWrit
     transaction: R.identity,
     update: R.identity,
     push: R.identity,
-    pushWithKey: (callback: (key: string) => any) => undefined
+    pushWithKey: (callback: (key: string | null) => any) => undefined
   }
 
   const reference = firebase.database().ref(path)
 
-  const pushWithKey = (callback: ((key: string) => any)) => {
+  const pushWithKey = (callback: ((key: string | null) => any)) => {
     if (!firebase) return
     const newReference = reference.push()
-    // @ts-ignore
-    const newKey: string = newReference.key
+    const newKey = newReference.key
     const valToPush = callback(newKey)
     return newReference.set(valToPush)
   }
