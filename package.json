@@ -1,6 +1,6 @@
 {
   "name": "fireact",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Hooks, middleware and helpers for using Firebase with React",
   "main": "dist/index.js",
   "jest": {
